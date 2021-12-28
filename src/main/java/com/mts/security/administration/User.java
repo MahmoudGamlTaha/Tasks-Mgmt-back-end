@@ -26,19 +26,14 @@ public class User implements UserDetails{
 
 	@Id
 	private Long USER_ID;
-	private String USER_NAME;
-	private String USER_EMAIL;
+
 	private String USER_LOGIN;
-	private String LAST_MODIFIED_BY;
-	private Long SIDE_CODE;
+
 	private String USER_PASS;
-	private String USER_TYPE;
-	private String USER_JOB;
-	private String USER_MOBIL_1;
-	private String USER_MOBIL_2;
+
 	
-	@Transient
-	private List<Role> roles;
+//	@Transient
+//	private List<Role> roles;
 	
 	@Transient
 	private List<UserPermission> permissions;
@@ -65,9 +60,9 @@ public class User implements UserDetails{
 	public List<String> getRolesStrings() {
 		
 		List<String> rolesStrings = new ArrayList<String>();
-		roles.forEach( role -> {
-			rolesStrings.add(role.getROLE_NAME());
-		});
+	//	roles.forEach( role -> {
+	//		rolesStrings.add(role.getROLE_NAME());
+	//	});
 		
 		return rolesStrings;
 	}

@@ -39,12 +39,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
 		// get user roles and permissions 
 		// then load them in the object user
-		List<UserRole> userRoles = userRoleRepository.getUserRolesById(user.getUSER_ID());
-		List<Role> roles = new ArrayList<Role>();
-		userRoles.forEach(r -> {
-			roles.add(roleRepository.getById(r.getROLE_ID()));
-		});
-		user.setRoles(roles);
+		//List<UserRole> userRoles = userRoleRepository.getUserRolesById(user.getUSER_ID());
+		//List<Role> roles = new ArrayList<Role>();
+	//	userRoles.forEach(r -> {
+		//	roles.add(roleRepository.getById(r.getROLE_ID()));
+	//	});
+		//user.setRoles(roles);
 		
 		List<UserPermission> userPermissions = userPermissionRepo.getUserPermissionsById(user.getUSER_ID(), Long.valueOf(env.getProperty("app.moduleID")));
 		user.setPermissions(userPermissions);

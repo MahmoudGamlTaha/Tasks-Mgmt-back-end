@@ -32,14 +32,27 @@ public class MainConfig extends WebSecurityConfigurerAdapter{
 	@Bean
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+       daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(this.userDetailsServiceImpl);
         return daoAuthenticationProvider;
     }
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new PasswordEncoder() {
+			
+			@Override
+			public boolean matches(CharSequence rawPassword, String encodedPassword) {
+				// TODO Auto-generated method stub
+				return true;
+			}
+			
+			@Override
+			public String encode(CharSequence rawPassword) {
+				// TODO Auto-generated method stub
+				return rawPassword.toString();
+			}
+		};
     }
 	
 	@Override
