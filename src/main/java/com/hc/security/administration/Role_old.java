@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "SC_ROLES", schema = "BPM_ADMINISTRATION")
+//@Entity
+//@Table(name = "SC_ROLES", schema = "EMS")
 @Proxy(lazy = false)
-public class Role {
+public class Role_old {
 
 	@Id
 	private Long ROLE_ID;

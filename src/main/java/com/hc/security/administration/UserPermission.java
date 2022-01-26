@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="ADM_USER_PERMISSIONS", schema = "EMS")
+@Table(name="ADM_USER_PRIVILEGE", schema = "EMS")
 @IdClass(UserPermissionId.class)
 public class UserPermission {
 

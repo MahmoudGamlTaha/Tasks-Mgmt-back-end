@@ -2,6 +2,7 @@ package com.hc.Controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/city")
 @RequiredArgsConstructor
 public class cityController {
+	@Autowired
     private final EmsCityCodeService emsCityCodeService;
     
     @GetMapping("/getall")
