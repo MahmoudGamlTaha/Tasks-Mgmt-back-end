@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -21,15 +22,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="ADM_USER", schema = "EMS")
+@Table(name="ADM_USER")
 public class User implements UserDetails{
 
 	@Id
+	@Column(name = "user_id")
 	private Long USER_ID;
 
-	private String USER_LOGIN;
-
+    @Column(name = "USER_PASS")
 	private String USER_PASS;
+    
+    @Column(name = "USER_TEL")
+    private String USER_TEL;
+
 
 	
 //	@Transient
@@ -84,7 +89,7 @@ public class User implements UserDetails{
 
     @Override
     public String getUsername() {
-        return getUSER_LOGIN();
+        return getUSER_TEL();
     }
 
     @Override

@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name="SC_USERROLE", schema = "BPM_ADMINISTRATION")
-public class UserRole {
+//@Entity
+//@Table(name="SC_USERROLE", schema = "BPM_ADMINISTRATION")
+public class UserRole_OLD {
 
 	@Id
 	private Long ROLE_ID;

@@ -82,7 +82,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
             // Search in the DB if we find the user by token subject (username)
             // If so, then grab user details and create spring auth token using username, pass, authorities/roles
             User user = userRepository.findByUsername(userName);
-            if (user.getUSER_LOGIN() != null) {       
+            if (user.getUsername() != null) {       
                 // get user roles and permissions 
         		// then load them in the object user               
         		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
