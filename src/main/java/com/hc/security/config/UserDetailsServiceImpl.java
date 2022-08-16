@@ -9,14 +9,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hc.security.administration.Role;
-import com.hc.security.administration.RoleRepo;
+//import com.hc.security.administration.Role;
 import com.hc.security.administration.User;
 import com.hc.security.administration.UserPermission;
 import com.hc.security.administration.UserPermissionRepo;
 import com.hc.security.administration.UserRepo;
-import com.hc.security.administration.UserRole;
-import com.hc.security.administration.UserRoleRepo;
+//import com.hc.security.administration.UserRole;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,8 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	private final UserRepo userRepository;
-	private final RoleRepo roleRepository;
-	private final UserRoleRepo userRoleRepository;
+	
 	private final UserPermissionRepo userPermissionRepo;
 	private final Environment env;
 

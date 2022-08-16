@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "SC_ROLES", schema = "BPM_ADMINISTRATION")
+//@Entity
+//@Table(name = "SC_ROLES", schema = "BPM_ADMINISTRATION")
 @Proxy(lazy = false)
 public class Role {
 

@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mts.security.administration.Role;
-import com.mts.security.administration.RoleRepo;
 import com.mts.security.administration.User;
 import com.mts.security.administration.UserPermission;
 import com.mts.security.administration.UserPermissionRepo;
@@ -25,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	private final UserRepo userRepository;
-	private final RoleRepo roleRepository;
+//	private final RoleRepo roleRepository;
 	private final UserRoleRepo userRoleRepository;
 	private final UserPermissionRepo userPermissionRepo;
 	private final Environment env;

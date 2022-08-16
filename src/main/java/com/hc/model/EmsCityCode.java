@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 /**
@@ -27,18 +30,18 @@ public class EmsCityCode implements Serializable {
 	private String cityNameE;
 
 	// bi-directional many-to-one association to EmsGovernorateCode
-	@ManyToOne
-	@JoinColumns({ @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "COUNTRY_ID" , insertable = false, updatable = false),
-			@JoinColumn(name = "GOVERNORATE_ID", referencedColumnName = "GOVERNORATE_ID", insertable = false, updatable = false) })
-	private EmsGovernorateCode emsGovernorateCode;
+//	@ManyToOne
+//	@JoinColumns({ @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "COUNTRY_ID" , insertable = false, updatable = false),
+//			@JoinColumn(name = "GOVERNORATE_ID", referencedColumnName = "GOVERNORATE_ID", insertable = false, updatable = false) })
+//	private EmsGovernorateCode emsGovernorateCode;
 
 	// bi-directional many-to-one association to EmsExpert
-	@OneToMany(mappedBy = "emsCityCode")
-	private List<EmsExpert> emsExperts;
+	//@OneToMany(mappedBy = "emsCityCode")
+	//private List<EmsExpert> emsExperts;
 
 	// bi-directional many-to-one association to EmsUniversityCode
-	@OneToMany(mappedBy = "emsCityCode")
-	private List<EmsUniversityCode> emsUniversityCodes;
+//	@OneToMany(mappedBy = "emsCityCode")
+//	private List<EmsUniversityCode> emsUniversityCodes;
 
 	public EmsCityCode() {
 	}
@@ -75,56 +78,56 @@ public class EmsCityCode implements Serializable {
 		this.cityNameE = cityNameE;
 	}
 
-	public EmsGovernorateCode getEmsGovernorateCode() {
-		return this.emsGovernorateCode;
-	}
+//	public EmsGovernorateCode getEmsGovernorateCode() {
+//		return this.emsGovernorateCode;
+//	}
+//
+//	public void setEmsGovernorateCode(EmsGovernorateCode emsGovernorateCode) {
+//		this.emsGovernorateCode = emsGovernorateCode;
+//	}
 
-	public void setEmsGovernorateCode(EmsGovernorateCode emsGovernorateCode) {
-		this.emsGovernorateCode = emsGovernorateCode;
-	}
+	//public List<EmsExpert> getEmsExperts() {
+	//	return this.emsExperts;
+	//}
 
-	public List<EmsExpert> getEmsExperts() {
-		return this.emsExperts;
-	}
+	//public void setEmsExperts(List<EmsExpert> emsExperts) {
+	//	this.emsExperts = emsExperts;
+//	}
 
-	public void setEmsExperts(List<EmsExpert> emsExperts) {
-		this.emsExperts = emsExperts;
-	}
+	//public EmsExpert addEmsExpert(EmsExpert emsExpert) {
+	//	getEmsExperts().add(emsExpert);
+	//	emsExpert.setEmsCityCode(this);
 
-	public EmsExpert addEmsExpert(EmsExpert emsExpert) {
-		getEmsExperts().add(emsExpert);
-		emsExpert.setEmsCityCode(this);
+	//	return emsExpert;
+//	}
 
-		return emsExpert;
-	}
+	//public EmsExpert removeEmsExpert(EmsExpert emsExpert) {
+//		getEmsExperts().remove(emsExpert);
+	//	emsExpert.setEmsCityCode(null);
 
-	public EmsExpert removeEmsExpert(EmsExpert emsExpert) {
-		getEmsExperts().remove(emsExpert);
-		emsExpert.setEmsCityCode(null);
+		//return emsExpert;
+//	}
 
-		return emsExpert;
-	}
-
-	public List<EmsUniversityCode> getEmsUniversityCodes() {
-		return this.emsUniversityCodes;
-	}
-
-	public void setEmsUniversityCodes(List<EmsUniversityCode> emsUniversityCodes) {
-		this.emsUniversityCodes = emsUniversityCodes;
-	}
-
-	public EmsUniversityCode addEmsUniversityCode(EmsUniversityCode emsUniversityCode) {
-		getEmsUniversityCodes().add(emsUniversityCode);
-		emsUniversityCode.setEmsCityCode(this);
-
-		return emsUniversityCode;
-	}
-
-	public EmsUniversityCode removeEmsUniversityCode(EmsUniversityCode emsUniversityCode) {
-		getEmsUniversityCodes().remove(emsUniversityCode);
-		emsUniversityCode.setEmsCityCode(null);
-
-		return emsUniversityCode;
-	}
+//	public List<EmsUniversityCode> getEmsUniversityCodes() {
+//		return this.emsUniversityCodes;
+//	}
+//
+//	public void setEmsUniversityCodes(List<EmsUniversityCode> emsUniversityCodes) {
+//		this.emsUniversityCodes = emsUniversityCodes;
+//	}
+//
+//	public EmsUniversityCode addEmsUniversityCode(EmsUniversityCode emsUniversityCode) {
+//		getEmsUniversityCodes().add(emsUniversityCode);
+//		emsUniversityCode.setEmsCityCode(this);
+//
+//		return emsUniversityCode;
+//	}
+//
+//	public EmsUniversityCode removeEmsUniversityCode(EmsUniversityCode emsUniversityCode) {
+//		getEmsUniversityCodes().remove(emsUniversityCode);
+//		emsUniversityCode.setEmsCityCode(null);
+//
+//		return emsUniversityCode;
+//	}
 
 }

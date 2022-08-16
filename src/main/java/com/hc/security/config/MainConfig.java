@@ -39,17 +39,24 @@ public class MainConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
     PasswordEncoder passwordEncoder() {
+    	
         return new PasswordEncoder() {
 			
 			@Override
 			public boolean matches(CharSequence rawPassword, String encodedPassword) {
 				// TODO Auto-generated method stub
+		
+                if(rawPassword.equals(encodedPassword))
 				return true;
+                else {
+                	return false;
+                }
 			}
 			
 			@Override
 			public String encode(CharSequence rawPassword) {
 				// TODO Auto-generated method stub
+				System.out.println(rawPassword);
 				return rawPassword.toString();
 			}
 		};
@@ -72,6 +79,11 @@ public class MainConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/swagger-ui.html").permitAll()
+                .antMatchers(HttpMethod.GET,"/v2/api-docs/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/swagger.json").permitAll()
+                .antMatchers(HttpMethod.GET,"/swagger-resources/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/webjars/**").permitAll()
+
                 //.antMatchers("/schedulejob/getjobs").hasRole("CC Online Support")
                 //.antMatchers("/schedulejob/getjobs").hasAuthority("Draft.Pull")
                 .anyRequest().authenticated();

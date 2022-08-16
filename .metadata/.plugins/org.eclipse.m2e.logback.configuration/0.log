@@ -1,0 +1,6 @@
+2022-01-09 21:00:58,904 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2022-01-09 21:05:33,642 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2022-01-09 21:14:29,937 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo1.maven.org/maven2/am/ik/archetype/elm-spring-boot-blank-archetype/0.0.3/elm-spring-boot-blank-archetype-0.0.3.jar
+2022-01-09 21:14:30,321 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo1.maven.org/maven2/am/ik/archetype/elm-spring-boot-blank-archetype/0.0.3/elm-spring-boot-blank-archetype-0.0.3.jar
+2022-01-09 21:14:30,970 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo1.maven.org/maven2/am/ik/archetype/elm-spring-boot-blank-archetype/0.0.3/elm-spring-boot-blank-archetype-0.0.3.pom
+2022-01-09 21:14:31,081 [ModalContext] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo1.maven.org/maven2/am/ik/archetype/elm-spring-boot-blank-archetype/0.0.3/elm-spring-boot-blank-archetype-0.0.3.pom

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -21,90 +22,99 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="ADM_USER", schema = "EMS")
-public class User implements UserDetails{
+@Table(name = "ADM_USER")
+public class User implements UserDetails {
 
 	@Id
+	@Column(name = "user_id")
 	private Long USER_ID;
 
-	private String USER_LOGIN;
-
+	@Column(name = "USER_PASS")
 	private String USER_PASS;
 
+	@Column(name = "USER_TEL")
+	private String USER_TEL;
+
+
+	@Column(name = "USER_TYPE")
+	private Long USER_TYPE;
 	
+	@Column(name = "EXPERT_AGE")
+	private Long AGE;
+
 //	@Transient
 //	private List<Role> roles;
-	
+
 	@Transient
 	private List<UserPermission> permissions;
-	
+
 	@Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
 
-        // Extract list of permissions (name)
-        getPermissionsStrings().forEach(p -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority(p);
-            authorities.add(authority);
-        });
+		// Extract list of permissions (name)
+		getPermissionsStrings().forEach(p -> {
+			GrantedAuthority authority = new SimpleGrantedAuthority(p);
+			authorities.add(authority);
+		});
 
-        // Extract list of roles (ROLE_name)
-        getRolesStrings().forEach(r -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
-            authorities.add(authority);
-        });
+		// Extract list of roles (ROLE_name)
+		getRolesStrings().forEach(r -> {
+			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
+			authorities.add(authority);
+		});
 
-        return authorities;
-    }
+		return authorities;
+	}
 
 	public List<String> getRolesStrings() {
-		
+
 		List<String> rolesStrings = new ArrayList<String>();
-	//	roles.forEach( role -> {
-	//		rolesStrings.add(role.getROLE_NAME());
-	//	});
-		
+		// roles.forEach( role -> {
+		// rolesStrings.add(role.getROLE_NAME());
+		// });
+
 		return rolesStrings;
 	}
-	
+
 	public List<String> getPermissionsStrings() {
-		
+
 		List<String> permissionsStrings = new ArrayList<String>();
-		permissions.forEach( permission -> {
+		permissions.forEach(permission -> {
 			permissionsStrings.add(permission.getRULE_NAME());
 		});
-		
+
 		return permissionsStrings;
 	}
 
 	@Override
-    public String getPassword() {
-        return getUSER_PASS();
-    }
+	public String getPassword() {
+		return getUSER_PASS();
+	}
 
-    @Override
-    public String getUsername() {
-        return getUSER_LOGIN();
-    }
+	@Override
+	public String getUsername() {
+		return getUSER_TEL();
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
 }
