@@ -19,7 +19,7 @@ public class EmsTaskCommentPK implements Serializable {
 	private long taskId;
 
 	@Column(name="TASK_COMMENT_ID")
-	private long taskCommentId;
+	private Long taskCommentId;
 
 	public EmsTaskCommentPK() {
 	}
@@ -35,10 +35,10 @@ public class EmsTaskCommentPK implements Serializable {
 	public void setTaskId(long taskId) {
 		this.taskId = taskId;
 	}
-	public long getTaskCommentId() {
+	public Long getTaskCommentId() {
 		return this.taskCommentId;
 	}
-	public void setTaskCommentId(long taskCommentId) {
+	public void setTaskCommentId(Long taskCommentId) {
 		this.taskCommentId = taskCommentId;
 	}
 

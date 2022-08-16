@@ -3,6 +3,8 @@ package com.hc.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hc.model.PrtsProjectPersonPK;
 /**
  * The persistent class for the PRTS_PROJECT_PERSON database table.
@@ -24,6 +26,7 @@ public class PrtsProjectPerson implements Serializable {
 	private BigDecimal userId;
 
 	//bi-directional many-to-one association to PrtsProject
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="PROJECT_ID", updatable = false, insertable = false)
 	private PrtsProject prtsProject;

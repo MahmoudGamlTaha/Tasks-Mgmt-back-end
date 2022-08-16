@@ -51,6 +51,18 @@ public class PrtsProject implements Serializable {
 
 	@Column(name="TYPE_CODE")
 	private BigDecimal typeCode;
+	
+	@Column(name="COLOR")
+	private String color;
+	
+	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 
 	//bi-directional one-to-one association to PrtsProjectDescription
 	@OneToOne(mappedBy="prtsProject")

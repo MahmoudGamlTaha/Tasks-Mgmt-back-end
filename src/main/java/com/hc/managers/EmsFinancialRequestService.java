@@ -1,6 +1,9 @@
 package com.hc.managers;
 
 import com.hc.model.EmsFinancialRequest;
+import com.hc.model.EmsFinancialRequest_;
+import com.hc.model.EmsTask;
+import com.hc.model.EmsTask_;
 import com.hc.repositories.EmsFinancialRequestRepository;
 import com.hc.security.administration.UserRepo;
 import com.hc.security.administration.UserService;
@@ -8,7 +11,11 @@ import com.hc.security.administration.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +28,33 @@ import org.springframework.stereotype.Service;
 public class EmsFinancialRequestService {
 
 	private EmsFinancialRequestRepository emsFinancialRequestRepository;
-
+	public static Specification<EmsFinancialRequest> getTasksSpecs(Long ExpertId) {
+        return (root, query, criteriaBuilder) -> {
+            return criteriaBuilder.equal(root.get(EmsFinancialRequest_.emsExpert), ExpertId);
+        };
+    }
 	@Autowired
 	public EmsFinancialRequestService(EmsFinancialRequestRepository emsFinancialRequestRepository) {
 		this.emsFinancialRequestRepository = emsFinancialRequestRepository;
 	}
+	
+	public List<EmsFinancialRequest> getAllFinancial(Long ExpertId){
+	  
+		return emsFinancialRequestRepository.findAll((getTasksSpecs(ExpertId)));
+
+	}
+	
+	public void AddComplaint(EmsFinancialRequest REQ){
+		  
+		 emsFinancialRequestRepository.AddShakwa(REQ.getRequestId(),REQ.getShakwaText());
+
+	}
+	
+	public void AddNewFinancial(Long Expert_id,BigDecimal PricePerHour){
+		  
+		 emsFinancialRequestRepository.AddFinancialRequest(PricePerHour,Expert_id);
+
+	}
+	
 
 }

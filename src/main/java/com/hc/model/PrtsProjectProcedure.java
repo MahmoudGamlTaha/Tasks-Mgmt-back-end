@@ -3,6 +3,8 @@ package com.hc.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hc.model.PrtsProjectProcedurePK;
 
 /**
@@ -32,6 +34,7 @@ public class PrtsProjectProcedure implements Serializable {
 	private java.math.BigDecimal userId;
 
 	//bi-directional many-to-one association to PrtsProject
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="PROJECT_ID",updatable = false, insertable = false)
 	private PrtsProject prtsProject;

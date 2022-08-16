@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -12,18 +15,13 @@ import java.util.Date;
 @Entity
 @Table(name="PRTS_PROJECT_NOTE")
 @NamedQuery(name="PrtsProjectNote.findAll", query="SELECT p FROM PrtsProjectNote p")
-@IdClass(PrtsProjectNotePK.class)
 public class PrtsProjectNote implements Serializable {
 	private static final long serialVersionUID = 1L;
     
-	@Id
-	@Column(name="PROJECT_ID")
-	private long projectId;
-    
-    @Id
-	@Column(name="NOTE_ID")
-	private long noteId;
+	@EmbeddedId
+	private PrtsProjectNotePK id;
 
+    
 	@Temporal(TemporalType.DATE)
 	@Column(name="NOTE_DATE")
 	private Date noteDate;
@@ -35,6 +33,7 @@ public class PrtsProjectNote implements Serializable {
 	private java.math.BigDecimal userId;
 
 	//bi-directional many-to-one association to PrtsProject
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="PROJECT_ID", insertable = false, updatable = false)
 	private PrtsProject prtsProject;
@@ -45,7 +44,13 @@ public class PrtsProjectNote implements Serializable {
 */
 	public PrtsProjectNote() {
 	}
+	public PrtsProjectNotePK getId() {
+		return id;
+	}
 
+	public void setId(PrtsProjectNotePK id) {
+		this.id = id;
+	}
 	public Date getNoteDate() {
 		return this.noteDate;
 	}

@@ -1,7 +1,11 @@
 package com.hc.model;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -23,13 +27,37 @@ public class EmsTaskComment implements Serializable {
 	@Column(name="USER_ID")
 	private java.math.BigDecimal userId;
 
+	@Column(name="COMMENT_BY")
+	private String commentBy;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="COMMENT_DATE")
+	private Date commentDate;
+	
+	public String getCommentBy() {
+		return commentBy;
+	}
+
+	public void setCommentBy(String commentBy) {
+		this.commentBy = commentBy;
+	}
+
 	//bi-directional many-to-one association to EmsTask
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="PROJECT_ID", referencedColumnName="PROJECT_ID", insertable = false, updatable = false),
 		@JoinColumn(name="TASK_ID", referencedColumnName="TASK_ID", insertable = false, updatable = false)
 		})
 	private EmsTask emsTask;
+
+	public Date getCommentDate() {
+		return commentDate;
+	}
+
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
+	}
 
 	public EmsTaskComment() {
 	}

@@ -16,7 +16,7 @@ public class EmsExpertEducationPK implements Serializable {
 	private long expertId;
 
 	@Column(name="EDUCATION_ID")
-	private long educationId;
+	private Long educationId;
 
 	public EmsExpertEducationPK() {
 	}
@@ -26,10 +26,10 @@ public class EmsExpertEducationPK implements Serializable {
 	public void setExpertId(long expertId) {
 		this.expertId = expertId;
 	}
-	public long getEducationId() {
+	public Long getEducationId() {
 		return this.educationId;
 	}
-	public void setEducationId(long educationId) {
+	public void setEducationId(Long educationId) {
 		this.educationId = educationId;
 	}
 

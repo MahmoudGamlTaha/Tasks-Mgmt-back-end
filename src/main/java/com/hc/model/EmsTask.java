@@ -2,6 +2,11 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Formula;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -48,17 +53,43 @@ public class EmsTask implements Serializable {
 
 	@Column(name="USER_ID")
 	private BigDecimal userId;
+	
+	public String getTaskIdParent() {
+		return taskIdParent;
+	}
 
+
+	public void setTaskIdParent(String taskIdParent) {
+		this.taskIdParent = taskIdParent;
+	}
+
+	@Column(name="CREATED_BY",updatable=false, insertable=false)
+	private String createdBy;
+    
+	@Column(name="TASK_ID_PARENT",updatable=false, insertable=false)
+	private String taskIdParent;
 	//bi-directional many-to-one association to EmsFinancialRequestDtl
-	@OneToMany(mappedBy="emsTask")
-	private List<EmsFinancialRequestDtl> emsFinancialRequestDtls;
+	//@OneToMany(mappedBy="emsTask")
+	//private List<EmsFinancialRequestDtl> emsFinancialRequestDtls;
+
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
 	//bi-directional many-to-one association to EmsExpert
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="EXPERT_ID")
 	private EmsExpert emsExpert;
 
 	//bi-directional many-to-one association to EmsTask
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="PROJECT_ID_PARENT", referencedColumnName="PROJECT_ID"),
@@ -66,6 +97,8 @@ public class EmsTask implements Serializable {
 		})
 	private EmsTask emsTask;
 
+	
+	
 	//bi-directional many-to-one association to EmsTask
 	@OneToMany(mappedBy="emsTask")
 	private List<EmsTask> emsTasks;
@@ -166,28 +199,28 @@ public class EmsTask implements Serializable {
 		this.userId = userId;
 	}
 
-	public List<EmsFinancialRequestDtl> getEmsFinancialRequestDtls() {
-		return this.emsFinancialRequestDtls;
-	}
-
-	public void setEmsFinancialRequestDtls(List<EmsFinancialRequestDtl> emsFinancialRequestDtls) {
-		this.emsFinancialRequestDtls = emsFinancialRequestDtls;
-	}
-
-	public EmsFinancialRequestDtl addEmsFinancialRequestDtl(EmsFinancialRequestDtl emsFinancialRequestDtl) {
-		getEmsFinancialRequestDtls().add(emsFinancialRequestDtl);
-		emsFinancialRequestDtl.setEmsTask(this);
-
-		return emsFinancialRequestDtl;
-	}
-
-	public EmsFinancialRequestDtl removeEmsFinancialRequestDtl(EmsFinancialRequestDtl emsFinancialRequestDtl) {
-		getEmsFinancialRequestDtls().remove(emsFinancialRequestDtl);
-		emsFinancialRequestDtl.setEmsTask(null);
-
-		return emsFinancialRequestDtl;
-	}
-
+//	public List<EmsFinancialRequestDtl> getEmsFinancialRequestDtls() {
+//		return this.emsFinancialRequestDtls;
+//	}
+//
+//	public void setEmsFinancialRequestDtls(List<EmsFinancialRequestDtl> emsFinancialRequestDtls) {
+//		this.emsFinancialRequestDtls = emsFinancialRequestDtls;
+//	}
+//
+//	public EmsFinancialRequestDtl addEmsFinancialRequestDtl(EmsFinancialRequestDtl emsFinancialRequestDtl) {
+//		getEmsFinancialRequestDtls().add(emsFinancialRequestDtl);
+//		emsFinancialRequestDtl.setEmsTask(this);
+//
+//		return emsFinancialRequestDtl;
+//	}
+//
+//	public EmsFinancialRequestDtl removeEmsFinancialRequestDtl(EmsFinancialRequestDtl emsFinancialRequestDtl) {
+//		getEmsFinancialRequestDtls().remove(emsFinancialRequestDtl);
+//		emsFinancialRequestDtl.setEmsTask(null);
+//
+//		return emsFinancialRequestDtl;
+//	}
+//
 	public EmsExpert getEmsExpert() {
 		return this.emsExpert;
 	}

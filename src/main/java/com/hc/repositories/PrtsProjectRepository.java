@@ -1,8 +1,14 @@
 package com.hc.repositories;
 
+import com.hc.model.DashboardTasks;
+import com.hc.model.ProjectExperts;
 import com.hc.model.PrtsProject;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +18,19 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrtsProjectRepository extends JpaRepository<PrtsProject, Long>, JpaSpecificationExecutor<PrtsProject>, QuerydslPredicateExecutor<PrtsProject> {
 
+	 @Query(value="select expt.expert_id,expt.expert_name_a,\r\n"
+	 		+ "decode (pex.project_id,null,0,1) as IS_SELECTED,project_ID\r\n"
+	 		+ "from (select * from ems_project_expert where project_id=:projectId) pex,\r\n"
+	 		+ "ems_expert expt\r\n"
+	 		+ "where \r\n"
+	 		+ "expt.expert_id=pex.expert_id(+)", nativeQuery=true)
+	    public List<ProjectExperts> FindProjectExperts(Long  projectId);
+	 @Query(value="select expt.expert_id,expt.expert_name_a,\r\n"
+		 		+ "decode (pex.project_id,null,0,1) as IS_SELECTED,project_ID\r\n"
+		 		+ "from (select * from ems_project_expert where project_id=:projectId) pex,\r\n"
+		 		+ "ems_expert expt\r\n"
+		 		+ "where \r\n"
+		 		+ "expt.expert_id=pex.expert_id", nativeQuery=true)
+		    public List<ProjectExperts> FindProjectExpertsOnly(Long  projectId);
+	 
 }

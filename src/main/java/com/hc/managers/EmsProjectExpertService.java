@@ -1,6 +1,10 @@
 package com.hc.managers;
 
+import com.hc.model.ADM_USER;
+import com.hc.model.DashboardTasks;
+import com.hc.model.EmsDashboardCounts;
 import com.hc.model.EmsProjectExpert;
+import com.hc.model.EmsProjectExpert_;
 import com.hc.repositories.EmsProjectExpertRepository;
 import com.hc.security.administration.UserRepo;
 import com.hc.security.administration.UserService;
@@ -8,7 +12,10 @@ import com.hc.security.administration.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +28,50 @@ import org.springframework.stereotype.Service;
 public class EmsProjectExpertService {
 
 	private EmsProjectExpertRepository emsProjectExpertRepository;
+	
+    public static Specification<EmsProjectExpert> getProjectsByExpertId(Long ExpertId) {
+        return (root, query, criteriaBuilder) -> {
+            return criteriaBuilder.equal(root.get(EmsProjectExpert_.emsExpert), ExpertId);
+        };
+    }
 
 	@Autowired
 	public EmsProjectExpertService(EmsProjectExpertRepository emsProjectExpertRepository) {
 		this.emsProjectExpertRepository = emsProjectExpertRepository;
 	}
 
+	public List<EmsProjectExpert> findall(){
+		return emsProjectExpertRepository.findAll();
+	}
+	public List<EmsProjectExpert> GetExpertProjects(Long ExpertId){
+//		return emsProjectExpertRepository.findAll(getProjectsByExpertId(ExpertId));
+		return emsProjectExpertRepository.FindExpertProjects(ExpertId);
+	}
+	public List<EmsProjectExpert> GetExpertAllProjects(Long ExpertId){
+//		return emsProjectExpertRepository.findAll(getProjectsByExpertId(ExpertId));
+		return emsProjectExpertRepository.FindExpertAdminProjects(ExpertId);
+	}
+	public void SaveProjectExperts(String allprojExper,Long projectId){
+//		return emsProjectExpertRepository.findAll(getProjectsByExpertId(ExpertId));
+		 emsProjectExpertRepository.SaveNewExperts(allprojExper, projectId);;
+	}
+	
+	public List<EmsDashboardCounts> GetExpertDashBoard(Long ExpertId){
+//		return emsProjectExpertRepository.findAll(getProjectsByExpertId(ExpertId));
+		return emsProjectExpertRepository.FindExpertDashboard(ExpertId);
+	}
+	
+	public List<DashboardTasks> GetExpertLateTasks(Long ExpertId){
+//		return emsProjectExpertRepository.findAll(getProjectsByExpertId(ExpertId));
+		return emsProjectExpertRepository.FindExpertLateTasks(ExpertId);
+	}
+	public List<DashboardTasks> GetExpertLatestTasks(Long ExpertId){
+//		return emsProjectExpertRepository.findAll(getProjectsByExpertId(ExpertId));
+		return emsProjectExpertRepository.FindExpertLatestOpen(ExpertId);
+	}
+	public List<ADM_USER> GetAllFreeUsers(){
+//		return emsProjectExpertRepository.findAll(getProjectsByExpertId(ExpertId));
+		return emsProjectExpertRepository.GetAllFreeUsers();
+	}
+	
 }

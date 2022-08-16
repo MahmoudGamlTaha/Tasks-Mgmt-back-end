@@ -3,6 +3,8 @@ package com.hc.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the EMS_FINANCIAL_REQUEST_DTL database table.
@@ -18,6 +20,7 @@ public class EmsFinancialRequestDtl implements Serializable {
 	private EmsFinancialRequestDtlPK id;
 
 	//bi-directional many-to-one association to EmsFinancialRequest
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="REQUEST_ID", insertable = false, updatable = false)
 	private EmsFinancialRequest emsFinancialRequest;

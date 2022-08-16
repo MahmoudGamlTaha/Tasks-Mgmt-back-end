@@ -1,6 +1,10 @@
 package com.hc.managers;
 
 import com.hc.model.EmsExpertEducation;
+import com.hc.model.EmsExpertEducationPK;
+import com.hc.model.EmsExpertEducation_;
+import com.hc.model.EmsFinancialRequest;
+import com.hc.model.EmsFinancialRequest_;
 import com.hc.repositories.EmsExpertEducationRepository;
 import com.hc.security.administration.UserRepo;
 import com.hc.security.administration.UserService;
@@ -8,7 +12,10 @@ import com.hc.security.administration.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +29,34 @@ public class EmsExpertEducationService {
 
 	private EmsExpertEducationRepository emsExpertEducationRepository;
 
+	public static Specification<EmsExpertEducation> getTasksSpecs(Long ExpertId) {
+        return (root, query, criteriaBuilder) -> {
+            return criteriaBuilder.equal(root.get(EmsExpertEducation_.emsExpert), ExpertId);
+        };
+    }
+	
 	@Autowired
 	public EmsExpertEducationService(EmsExpertEducationRepository emsExpertEducationRepository) {
 		this.emsExpertEducationRepository = emsExpertEducationRepository;
 	}
+	
+	public EmsExpertEducation addNewEducation(EmsExpertEducation e) {
+		e=emsExpertEducationRepository.save(e);
+		return e;
+		
+	}
+	public List<EmsExpertEducation> getEducationbyExpert(Long ExpertId) {
+		return emsExpertEducationRepository.findAll(getTasksSpecs(ExpertId));
+	}
+	public EmsExpertEducation getEducation(EmsExpertEducationPK Id) {
+		return emsExpertEducationRepository.getById(Id);
+	}
+	public EmsExpertEducationPK DeleteEducation(EmsExpertEducationPK Id) {
+		 emsExpertEducationRepository.deleteById(Id);
+		 return Id;
+	}
+	
+	
+	
 
 }

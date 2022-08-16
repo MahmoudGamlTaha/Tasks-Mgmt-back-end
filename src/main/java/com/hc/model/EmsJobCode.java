@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -25,7 +28,7 @@ public class EmsJobCode implements Serializable {
 
 	@Column(name="JOB_NAME_E")
 	private String jobNameE;
-
+	@JsonIgnore
 	//bi-directional many-to-one association to EmsExpertExperience
 	@OneToMany(mappedBy="emsJobCode")
 	private List<EmsExpertExperience> emsExpertExperiences;

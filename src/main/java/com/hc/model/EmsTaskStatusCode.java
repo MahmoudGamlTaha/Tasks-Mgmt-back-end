@@ -23,9 +23,9 @@ public class EmsTaskStatusCode implements Serializable {
 	@Column(name="TASK_STATUS_NAME")
 	private String taskStatusName;
 
-	//bi-directional many-to-one association to EmsTask
-	@OneToMany(mappedBy="emsTaskStatusCode")
-	private List<EmsTask> emsTasks;
+//	//bi-directional many-to-one association to EmsTask
+//	@OneToMany(mappedBy="emsTaskStatusCode")
+//	private List<EmsTask> emsTasks;
 
 	public EmsTaskStatusCode() {
 	}
@@ -46,26 +46,26 @@ public class EmsTaskStatusCode implements Serializable {
 		this.taskStatusName = taskStatusName;
 	}
 
-	public List<EmsTask> getEmsTasks() {
-		return this.emsTasks;
-	}
-
-	public void setEmsTasks(List<EmsTask> emsTasks) {
-		this.emsTasks = emsTasks;
-	}
-
-	public EmsTask addEmsTask(EmsTask emsTask) {
-		getEmsTasks().add(emsTask);
-		emsTask.setEmsTaskStatusCode(this);
-
-		return emsTask;
-	}
-
-	public EmsTask removeEmsTask(EmsTask emsTask) {
-		getEmsTasks().remove(emsTask);
-		emsTask.setEmsTaskStatusCode(null);
-
-		return emsTask;
-	}
+//	public List<EmsTask> getEmsTasks() {
+//		return this.emsTasks;
+//	}
+//
+//	public void setEmsTasks(List<EmsTask> emsTasks) {
+//		this.emsTasks = emsTasks;
+//	}
+//
+//	public EmsTask addEmsTask(EmsTask emsTask) {
+//		getEmsTasks().add(emsTask);
+//		emsTask.setEmsTaskStatusCode(this);
+//
+//		return emsTask;
+//	}
+//
+//	public EmsTask removeEmsTask(EmsTask emsTask) {
+//		getEmsTasks().remove(emsTask);
+//		emsTask.setEmsTaskStatusCode(null);
+//
+//		return emsTask;
+//	}
 
 }

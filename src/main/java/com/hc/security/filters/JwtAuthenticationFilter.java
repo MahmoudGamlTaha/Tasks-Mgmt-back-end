@@ -94,7 +94,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
        
         Map<String, String> tokenObj = new HashMap<>();
         tokenObj.put(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
-        
+        tokenObj.put("EXPERT_ID",user.getEXPERT_ID());
+        tokenObj.put("EXPERT_AGE",String.valueOf(user.getAGE()));
+        tokenObj.put("USER_TYPE",String.valueOf(user.getUSER_TYPE()));
         response.setContentType("application/json");
     	new ObjectMapper().writeValue(response.getOutputStream(), tokenObj);
     }

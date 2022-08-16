@@ -14,9 +14,10 @@ public class EmsExpertExperiencePK implements Serializable {
 
 	@Column(name="EXPERT_ID", insertable=false, updatable=false)
 	private long expertId;
-
+	
+	
 	@Column(name="EXPERIENCE_ID")
-	private long experienceId;
+	private Long experienceId;
 
 	public EmsExpertExperiencePK() {
 	}
@@ -26,10 +27,10 @@ public class EmsExpertExperiencePK implements Serializable {
 	public void setExpertId(long expertId) {
 		this.expertId = expertId;
 	}
-	public long getExperienceId() {
+	public Long getExperienceId() {
 		return this.experienceId;
 	}
-	public void setExperienceId(long experienceId) {
+	public void setExperienceId(Long experienceId) {
 		this.experienceId = experienceId;
 	}
 

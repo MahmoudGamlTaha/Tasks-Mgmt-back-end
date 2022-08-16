@@ -39,6 +39,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
 	@Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         
+		
+		
 		if(request.getServletPath().equals("/login")) {
 			chain.doFilter(request, response);
 			return;
@@ -46,7 +48,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
 		
 		// Read the Authorization header, where the JWT token should be
 		String header = request.getHeader(JwtProperties.HEADER_STRING);
-		
+		log.error("Error logging in: {}", header);
 		// If header does not contain BEARER or is null delegate to Spring impl and exit
 		if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
 			chain.doFilter(request, response);
@@ -60,6 +62,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
 			chain.doFilter(request, response);
 		} catch(Exception ex) {
 			log.error("Error logging in: {}", ex.getMessage());
+			ex.printStackTrace();
 			response.setHeader("error", ex.getMessage());
 			response.setStatus(HttpStatus.FORBIDDEN.value());
 			Map<String, String> error = new HashMap<>();
@@ -78,7 +81,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
         	JWTVerifier verifier = JWT.require(HMAC512(JwtProperties.SECRET.getBytes())).build();        	
         	DecodedJWT decodedJWT = verifier.verify(token);       	
             String userName = decodedJWT.getSubject();
-
+            log.error("Error logging in: {}", userName);
             // Search in the DB if we find the user by token subject (username)
             // If so, then grab user details and create spring auth token using username, pass, authorities/roles
             User user = userRepository.findByUsername(userName);

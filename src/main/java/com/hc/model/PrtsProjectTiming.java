@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -16,8 +19,8 @@ public class PrtsProjectTiming  {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="fake_Id", insertable = false, updatable = false)
-	private long fakeId;
+	@Column(name="PROJECT_ID", insertable = false, updatable = false)
+	private long PROJECT_ID;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="ACTUAL_AWARD_DATE")
@@ -84,8 +87,9 @@ public class PrtsProjectTiming  {
 	private Date planSiteReceiptDate;
 
 	//bi-directional one-to-one association to PrtsProject
+	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="PROJECT_ID")
+	@JoinColumn(name="PROJECT_ID", insertable = false, updatable = false)
 	private PrtsProject prtsProject;
 
 	public PrtsProjectTiming() {

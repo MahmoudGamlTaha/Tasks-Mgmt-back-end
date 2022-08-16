@@ -27,8 +27,8 @@ public class EmsEducationDegreeCode implements Serializable {
 	private String qualClassNameE;
 
 	//bi-directional many-to-one association to EmsExpertEducation
-	@OneToMany(mappedBy="emsEducationDegreeCode")
-	private List<EmsExpertEducation> emsExpertEducations;
+	//@OneToMany(mappedBy="emsEducationDegreeCode")
+	//private List<EmsExpertEducation> emsExpertEducations;
 
 	public EmsEducationDegreeCode() {
 	}
@@ -57,26 +57,26 @@ public class EmsEducationDegreeCode implements Serializable {
 		this.qualClassNameE = qualClassNameE;
 	}
 
-	public List<EmsExpertEducation> getEmsExpertEducations() {
-		return this.emsExpertEducations;
-	}
+	//public List<EmsExpertEducation> getEmsExpertEducations() {
+	//	return this.emsExpertEducations;
+	//}
 
-	public void setEmsExpertEducations(List<EmsExpertEducation> emsExpertEducations) {
-		this.emsExpertEducations = emsExpertEducations;
-	}
+	//public void setEmsExpertEducations(List<EmsExpertEducation> emsExpertEducations) {
+	//	this.emsExpertEducations = emsExpertEducations;
+	//}
 
-	public EmsExpertEducation addEmsExpertEducation(EmsExpertEducation emsExpertEducation) {
-		getEmsExpertEducations().add(emsExpertEducation);
-		emsExpertEducation.setEmsEducationDegreeCode(this);
+	//public EmsExpertEducation addEmsExpertEducation(EmsExpertEducation emsExpertEducation) {
+	//	getEmsExpertEducations().add(emsExpertEducation);
+	//	emsExpertEducation.setEmsEducationDegreeCode(this);
 
-		return emsExpertEducation;
-	}
+	//	return emsExpertEducation;
+	//}
 
-	public EmsExpertEducation removeEmsExpertEducation(EmsExpertEducation emsExpertEducation) {
-		getEmsExpertEducations().remove(emsExpertEducation);
-		emsExpertEducation.setEmsEducationDegreeCode(null);
+	//public EmsExpertEducation removeEmsExpertEducation(EmsExpertEducation emsExpertEducation) {
+	//	getEmsExpertEducations().remove(emsExpertEducation);
+	//	emsExpertEducation.setEmsEducationDegreeCode(null);
 
-		return emsExpertEducation;
-	}
+//		return emsExpertEducation;
+//	}
 
 }

@@ -2,6 +2,10 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import java.util.Date;
 
 
@@ -27,6 +31,8 @@ public class EmsExpertEducation implements Serializable {
 
 	@Column(name="EDUCATION_RATING")
 	private String educationRating;
+
+
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="EDUCATION_STARTDATE")
@@ -102,7 +108,7 @@ public class EmsExpertEducation implements Serializable {
 	public void setEmsEducationDegreeCode(EmsEducationDegreeCode emsEducationDegreeCode) {
 		this.emsEducationDegreeCode = emsEducationDegreeCode;
 	}
-
+/*
 	public EmsExpert getEmsExpert() {
 		return this.emsExpert;
 	}
@@ -110,7 +116,7 @@ public class EmsExpertEducation implements Serializable {
 	public void setEmsExpert(EmsExpert emsExpert) {
 		this.emsExpert = emsExpert;
 	}
-
+*/
 	public EmsStudyFieldCode getEmsStudyFieldCode() {
 		return this.emsStudyFieldCode;
 	}

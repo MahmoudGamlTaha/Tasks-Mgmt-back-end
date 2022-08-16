@@ -39,21 +39,21 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
 
 	@Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        
+		System.out.println("Inside Filter");
 		if(request.getServletPath().equals("/login")) {
 			chain.doFilter(request, response);
 			return;
 		}
-		
+			
 		// Read the Authorization header, where the JWT token should be
 		String header = request.getHeader(JwtProperties.HEADER_STRING);
-		
+		System.out.println(header);	
 		// If header does not contain BEARER or is null delegate to Spring impl and exit
 		if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
 			chain.doFilter(request, response);
 			return;
 		}
-		
+			
 		// If header is present, try grab user principal perform authorization
 		try {
 			Authentication authentication = getUsernamePasswordAuthentication(request);
@@ -61,6 +61,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
 			chain.doFilter(request, response);
 		} catch(Exception ex) {
 			log.error("Error logging in: {}", ex.getMessage());
+			ex.printStackTrace();
 			response.setHeader("error", ex.getMessage());
 			response.setStatus(HttpStatus.FORBIDDEN.value());
 			Map<String, String> error = new HashMap<>();

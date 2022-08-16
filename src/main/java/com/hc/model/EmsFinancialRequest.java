@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -49,6 +52,7 @@ public class EmsFinancialRequest implements Serializable {
 	private String shakwaText;
 
 	//bi-directional many-to-one association to EmsExpert
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="EXPERT_ID", insertable = false, updatable = false)
 	private EmsExpert emsExpert;

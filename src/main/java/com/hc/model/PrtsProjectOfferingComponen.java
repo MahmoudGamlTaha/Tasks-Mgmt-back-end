@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -15,9 +18,9 @@ import java.util.Date;
 @NamedQuery(name="PrtsProjectOfferingComponen.findAll", query="SELECT p FROM PrtsProjectOfferingComponen p")
 public class PrtsProjectOfferingComponen implements Serializable {
 	private static final long serialVersionUID = 1L;
-    @Id
-	@Column(name="id", insertable = false, updatable = false)
-	private long fakeId;
+	@Id
+	@Column(name="PROJECT_ID", insertable = false, updatable = false)
+	private long PROJECT_ID;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DOC_ACTUALDATE")
@@ -108,8 +111,9 @@ public class PrtsProjectOfferingComponen implements Serializable {
 	private Date tenderPlandate;
 
 	//bi-directional one-to-one association to PrtsProject
+	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="PROJECT_ID")
+	@JoinColumn(name="PROJECT_ID", insertable = false, updatable = false)
 	private PrtsProject prtsProject;
 
 	public PrtsProjectOfferingComponen() {

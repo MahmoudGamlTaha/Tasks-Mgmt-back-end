@@ -1,7 +1,11 @@
 package com.hc.managers;
 
+import com.hc.model.ProjectExperts;
 import com.hc.model.PrtsProject;
 import com.hc.repositories.PrtsProjectRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,5 +21,26 @@ public class PrtsProjectService {
 	public PrtsProjectService(PrtsProjectRepository prtsProjectRepository) {
 		this.prtsProjectRepository = prtsProjectRepository;
 	}
+	
+	public PrtsProject AddNewProject(PrtsProject newPrj) {
+		return prtsProjectRepository.save(newPrj);
+		
+	}
+	
+	public PrtsProject getProject(Long projectId) {
+		return prtsProjectRepository.getById(projectId);
+		
+	}
+	
+	public List<ProjectExperts> getProjectExperts(Long projectId) {
+		return prtsProjectRepository.FindProjectExperts(projectId);
+		
+	}
+	public List<ProjectExperts> FindProjectExpertsOnly(Long projectId) {
+		return prtsProjectRepository.FindProjectExpertsOnly(projectId);
+		
+	}
+	
+	
 
 }

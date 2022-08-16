@@ -2,6 +2,9 @@ package com.hc.repositories;
 
 import com.hc.model.EmsTask;
 import com.hc.model.EmsTaskPK;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
@@ -12,5 +15,7 @@ import org.springframework.stereotype.Repository;
 */
 @Repository
 public interface EmsTaskRepository extends JpaRepository<EmsTask, EmsTaskPK>, JpaSpecificationExecutor<EmsTask>, QuerydslPredicateExecutor<EmsTask> {
+
+	  List<EmsTask> findByTaskIdParentIsNull();
 
 }

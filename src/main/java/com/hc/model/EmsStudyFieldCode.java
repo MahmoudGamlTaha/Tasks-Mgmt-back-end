@@ -27,8 +27,8 @@ public class EmsStudyFieldCode implements Serializable {
 	private String studyFieldNameE;
 
 	//bi-directional many-to-one association to EmsExpertEducation
-	@OneToMany(mappedBy="emsStudyFieldCode")
-	private List<EmsExpertEducation> emsExpertEducations;
+	//@OneToMany(mappedBy="emsStudyFieldCode")
+	//private List<EmsExpertEducation> emsExpertEducations;
 
 	public EmsStudyFieldCode() {
 	}
@@ -57,7 +57,7 @@ public class EmsStudyFieldCode implements Serializable {
 		this.studyFieldNameE = studyFieldNameE;
 	}
 
-	public List<EmsExpertEducation> getEmsExpertEducations() {
+	/*public List<EmsExpertEducation> getEmsExpertEducations() {
 		return this.emsExpertEducations;
 	}
 
@@ -77,6 +77,6 @@ public class EmsStudyFieldCode implements Serializable {
 		emsExpertEducation.setEmsStudyFieldCode(null);
 
 		return emsExpertEducation;
-	}
+	}*/
 
 }

@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -39,6 +42,7 @@ public class EmsExpertCertificate implements Serializable {
 	private Date certificateStartdate;
 
 	//bi-directional many-to-one association to EmsExpert
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="EXPERT_ID", insertable = false, updatable = false)
 	private EmsExpert emsExpert;

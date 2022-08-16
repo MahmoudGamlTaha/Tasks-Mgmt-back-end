@@ -26,5 +26,9 @@ public class EmsTaskCommentService {
 	public EmsTaskCommentService(EmsTaskCommentRepository emsTaskCommentRepository) {
 		this.emsTaskCommentRepository = emsTaskCommentRepository;
 	}
-
+    
+	public boolean saveComment(EmsTaskComment comm) {
+		emsTaskCommentRepository.save(comm);
+		return true;
+	}
 }

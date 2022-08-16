@@ -1,12 +1,15 @@
 package com.hc.managers;
 
 import com.hc.model.EmsJobCode;
+import com.hc.model.EmsStudyFieldCode;
 import com.hc.repositories.EmsJobCodeRepository;
 import com.hc.security.administration.UserRepo;
 import com.hc.security.administration.UserService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,5 +29,9 @@ public class EmsJobCodeService {
 	public EmsJobCodeService(EmsJobCodeRepository emsJobCodeRepository) {
 		this.emsJobCodeRepository = emsJobCodeRepository;
 	}
+	public List<EmsJobCode> getall(){
+		return emsJobCodeRepository.findAll();
+	}
+
 
 }

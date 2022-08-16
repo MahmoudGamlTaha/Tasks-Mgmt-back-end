@@ -30,12 +30,12 @@ public class EmsCountryCode implements Serializable {
 	private String countryNameE;
 
 	//bi-directional many-to-one association to EmsExpert
-	@OneToMany(mappedBy="emsCountryCode")
-	private List<EmsExpert> emsExperts;
+	//@OneToMany(mappedBy="emsCountryCode")
+//	private List<EmsExpert> emsExperts;
 
 	//bi-directional many-to-one association to EmsGovernorateCode
-	@OneToMany(mappedBy="emsCountryCode")
-	private List<EmsGovernorateCode> emsGovernorateCodes;
+	//@OneToMany(mappedBy="emsCountryCode")
+//	private List<EmsGovernorateCode> emsGovernorateCodes;
 
 	public EmsCountryCode() {
 	}
@@ -72,29 +72,29 @@ public class EmsCountryCode implements Serializable {
 		this.countryNameE = countryNameE;
 	}
 
-	public List<EmsExpert> getEmsExperts() {
-		return this.emsExperts;
-	}
+	//public List<EmsExpert> getEmsExperts() {
+	//	return this.emsExperts;
+//	}
 
-	public void setEmsExperts(List<EmsExpert> emsExperts) {
-		this.emsExperts = emsExperts;
-	}
+	//public void setEmsExperts(List<EmsExpert> emsExperts) {
+	//	this.emsExperts = emsExperts;
+//	}
 
-	public EmsExpert addEmsExpert(EmsExpert emsExpert) {
-		getEmsExperts().add(emsExpert);
-		emsExpert.setEmsCountryCode(this);
+	//public EmsExpert addEmsExpert(EmsExpert emsExpert) {
+	//	getEmsExperts().add(emsExpert);
+	//	emsExpert.setEmsCountryCode(this);
 
-		return emsExpert;
-	}
+		//return emsExpert;
+//	}
 
-	public EmsExpert removeEmsExpert(EmsExpert emsExpert) {
-		getEmsExperts().remove(emsExpert);
-		emsExpert.setEmsCountryCode(null);
+	//public EmsExpert removeEmsExpert(EmsExpert emsExpert) {
+		//getEmsExperts().remove(emsExpert);
+		//emsExpert.setEmsCountryCode(null);
 
-		return emsExpert;
-	}
+		//return emsExpert;
+//	}
 
-	public List<EmsGovernorateCode> getEmsGovernorateCodes() {
+	/*public List<EmsGovernorateCode> getEmsGovernorateCodes() {
 		return this.emsGovernorateCodes;
 	}
 
@@ -115,5 +115,5 @@ public class EmsCountryCode implements Serializable {
 
 		return emsGovernorateCode;
 	}
-
+*/
 }

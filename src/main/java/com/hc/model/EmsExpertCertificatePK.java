@@ -16,7 +16,7 @@ public class EmsExpertCertificatePK implements Serializable {
 	private long expertId;
 
 	@Column(name="CERTIFICATE_ID")
-	private long certificateId;
+	private Long certificateId;
 
 	public EmsExpertCertificatePK() {
 	}
@@ -26,10 +26,10 @@ public class EmsExpertCertificatePK implements Serializable {
 	public void setExpertId(long expertId) {
 		this.expertId = expertId;
 	}
-	public long getCertificateId() {
+	public Long getCertificateId() {
 		return this.certificateId;
 	}
-	public void setCertificateId(long certificateId) {
+	public void setCertificateId(Long certificateId) {
 		this.certificateId = certificateId;
 	}
 

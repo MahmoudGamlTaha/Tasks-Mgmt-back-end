@@ -1,10 +1,22 @@
 package com.hc.repositories;
 
+import com.hc.model.ADM_USER;
+import com.hc.model.DashboardTasks;
+import com.hc.model.EmsDashboardCounts;
 import com.hc.model.EmsProjectExpert;
 import com.hc.model.EmsProjectExpertPK;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,4 +25,82 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmsProjectExpertRepository extends JpaRepository<EmsProjectExpert, EmsProjectExpertPK>, JpaSpecificationExecutor<EmsProjectExpert>, QuerydslPredicateExecutor<EmsProjectExpert> {
 
+    @Query(value="select prj.project_id project_id,prj.Expert_id Expert_id,prj.Hour_price Hour_price,count(*) TOTAL_COUNT,\r\n"
+    		+ "sum(case when tsk.TASK_STATUS_ID in (8,9,10,11,12) then 1 else 0 end) COMPLETED_COUNT,\r\n"
+    		+ "sum(tsk.TASK_EXPECTED_HOUR)+(sum(TASK_EXPECTED_MINUTE)/60) TOTAL_HOURS,\r\n"
+    		+ "sum(nvl(tsk.task_actual_hour,0))+round((sum(nvl(tsk.task_actual_minute,0))/60),2) COMPLETED_HOURS\r\n"
+    		+ "from \r\n"
+    		+ "(select * from ems_project_expert where expert_id=:expertID ) prj left join ems_task tsk\r\n"
+    		+ "on prj.project_id = tsk.project_id\r\n"
+    		+ "and prj.expert_id=tsk.expert_id\r\n"
+    		+ "group by prj.project_id,prj.Expert_id,prj.Hour_price ", nativeQuery=true)
+	public List<EmsProjectExpert> FindExpertProjects(Long  expertID);
+    
+    
+    @Query(value="select prj.project_id project_id,:expertID  Expert_id,0 Hour_price,count(Task_id) TOTAL_COUNT,\r\n"
+    		+ "sum(case when tsk.TASK_STATUS_ID in (8,9,10,11,12) then 1 else 0 end) COMPLETED_COUNT,\r\n"
+    		+ "nvl(sum(tsk.TASK_EXPECTED_HOUR)+(sum(TASK_EXPECTED_MINUTE)/60),0) TOTAL_HOURS,\r\n"
+    		+ "sum(nvl(tsk.task_actual_hour,0))+round((sum(nvl(tsk.task_actual_minute,0))/60),2) COMPLETED_HOURS\r\n"
+    		+ "from \r\n"
+    		+ "prts_project prj left join ems_task tsk\r\n"
+    		+ "on prj.project_id = tsk.project_id\r\n"
+    		+ "group by prj.project_id", nativeQuery=true)
+	public List<EmsProjectExpert> FindExpertAdminProjects(Long  expertID);
+    
+    
+    @Transactional
+	@Modifying(clearAutomatically = true)
+	@Query(value = "CALL SAVE_EXPERTS_PROJECT(:P_EXPERTS_IDS,:P_PROJECT_ID)", nativeQuery = true)
+	 public void SaveNewExperts(@Param("P_EXPERTS_IDS") String P_EXPERTS_IDS,@Param("P_PROJECT_ID") Long P_PROJECT_ID);
+
+
+    @Query(value="select PROJECT_ID,EXPERT_ID,HOUR_PRICE"
+    		+ ",0 as TOTAL_COUNT,0 as COMPLETED_COUNT,0 as TOTAL_HOURS,0 as COMPLETED_HOURS from ems_project_expert where PROJECT_ID=:ProjectId ", nativeQuery=true)
+	public List<EmsProjectExpert> FindProjectExperts(Long  ProjectId);
+    
+    
+    @Query(value="select 1 as ID,count(*) TOTAL_TASK_COUNT,\r\n"
+    		+ "sum(case when tsk.TASK_STATUS_ID in (8,9,10,11,12) then 1 else 0 end) COMPLETED_TASK_COUNT,\r\n"
+    		+ "round(sum(tsk.TASK_EXPECTED_HOUR)+(sum(TASK_EXPECTED_MINUTE)/60)) TOTAL_HOURS,\r\n"
+    		+ "sum(nvl(tsk.task_actual_hour,0))+round((sum(nvl(tsk.task_actual_minute,0))/60),2) COMPLETED_HOURS,\r\n"
+    		+ "round(sum(\r\n"
+    		+ "(nvl(tsk.TASK_EXPECTED_HOUR,0)+(nvl(tsk.TASK_EXPECTED_MINUTE,0))/60) * prj.HOUR_PRICE),2) as COMPLETED_BUDGET\r\n"
+    		+ ",\r\n"
+    		+ "round(sum(\r\n"
+    		+ "(nvl(tsk.task_actual_hour,0)+(nvl(tsk.task_actual_minute,0))/60) * prj.HOUR_PRICE),2) as EXPECTED_BUDGET\r\n"
+    		+ "from ems_task tsk ,ems_project_expert prj\r\n"
+    		+ "where \r\n"
+    		+ "prj.project_id=tsk.project_id \r\n"
+    		+ "and tsk.expert_id = prj.expert_id\r\n"
+    		+ "and\r\n"
+    		+ "tsk.expert_id=:expertID and to_char(task_expected_date,'mm')=to_char(sysdate,'mm') ", nativeQuery=true)
+	public List<EmsDashboardCounts> FindExpertDashboard(Long  expertID);
+    
+    @Query(value="select tsk.TASK_STATUS_ID,Task_id,tsk.task_name,proj.project_name,proj.project_id,tsk.task_actual_minute+(tsk.task_actual_hour*60) TotalMinutes,\r\n"
+    		+ "stat.task_status_name,to_char(tsk.TASK_CREATE_DATE,'dd-mm-yyyy')TASK_CREATE_DATE,to_char(tsk.task_expected_date,'dd-mm-yyyy') task_expected_date, '#FF6347' as color\r\n"
+    		+ "from ems_task tsk,prts_project Proj,ems_task_status_code stat\r\n"
+    		+ "where task_expected_date<sysdate\r\n"
+    		+ "and tsk.task_status_id=stat.task_status_id\r\n"
+    		+ "and tsk.PROJECT_ID=proj.PROJECT_ID\r\n"
+    		+ "and tsk.task_status_id in (2,3,4,7 ) and Expert_id=:expertID", nativeQuery=true)
+    public List<DashboardTasks> FindExpertLateTasks(Long  expertID);
+    
+    @Query(value="select tsk.TASK_STATUS_ID,Task_id,tsk.task_name,proj.project_name,proj.project_id,tsk.task_actual_minute+(tsk.task_actual_hour*60) TotalMinutes,\r\n"
+    		+ "stat.task_status_name,to_char(tsk.TASK_CREATE_DATE,'dd-mm-yyyy') TASK_CREATE_DATE,to_char(tsk.task_expected_date,'dd-mm-yyyy') as task_expected_date, proj.color as color\r\n"
+    		+ "from ems_task tsk,prts_project Proj,ems_task_status_code stat\r\n"
+    		+ "where  tsk.task_status_id=stat.task_status_id\r\n"
+    		+ "and tsk.PROJECT_ID=proj.PROJECT_ID\r\n"
+    		+ "and tsk.task_status_id in (2,3,4,7 ) and Expert_id=:expertID\r\n"
+    		+ "order by tsk.last_updated", nativeQuery=true)
+    public List<DashboardTasks> FindExpertLatestOpen(Long  expertID);
+    
+    @Query(value="select user_id,user_name from adm_user where user_id not in (select user_id from ems_expert)", nativeQuery=true)
+    public List<ADM_USER> GetAllFreeUsers();
+    
+    @Modifying
+    @Query(value="delete from ems_project_expert where project_id=:projId)", nativeQuery=true)
+    public Void DeleteAllExpertsFromProject(Long  projId);
 }
+
+
+

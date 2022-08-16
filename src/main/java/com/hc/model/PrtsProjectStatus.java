@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -14,9 +17,9 @@ import java.util.Date;
 @NamedQuery(name="PrtsProjectStatus.findAll", query="SELECT p FROM PrtsProjectStatus p")
 public class PrtsProjectStatus implements Serializable {
 	private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name="id", updatable = false, insertable = false)
-	private long fakeId;
+	@Id
+	@Column(name="PROJECT_ID", insertable = false, updatable = false)
+	private long PROJECT_ID;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="CHANGE_DATE_10")
@@ -59,8 +62,9 @@ public class PrtsProjectStatus implements Serializable {
 	private java.math.BigDecimal userId9;
 
 	//bi-directional one-to-one association to PrtsProject
+	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="PROJECT_ID")
+	@JoinColumn(name="PROJECT_ID", insertable = false, updatable = false)
 	private PrtsProject prtsProject;
 
 	public PrtsProjectStatus() {

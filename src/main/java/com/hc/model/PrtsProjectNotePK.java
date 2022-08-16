@@ -7,12 +7,15 @@ import javax.persistence.*;
  * The primary key class for the PRTS_PROJECT_NOTE database table.
  * 
  */
+@Embeddable
 public class PrtsProjectNotePK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="PROJECT_ID", insertable=false, updatable=false)
 	private long projectId;
 
+	@Column(name="NOTE_ID")
 	private long noteId;
 
 	public PrtsProjectNotePK() {

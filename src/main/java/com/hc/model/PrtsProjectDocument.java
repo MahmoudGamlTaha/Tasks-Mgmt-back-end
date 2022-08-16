@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -36,9 +39,10 @@ public class PrtsProjectDocument {
 	private java.math.BigDecimal userId;
 
 	//bi-directional many-to-one association to PrtsProject
-	//@ManyToOne
-//	@JoinColumn(name="PROJECT_ID")
-	//private PrtsProject prtsProject;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="PROJECT_ID", insertable = false, updatable = false)
+	private PrtsProject prtsProject;
 
 	public PrtsProjectDocument() {
 	}

@@ -16,7 +16,7 @@ public class EmsTaskPK implements Serializable {
 	private long projectId;
 
 	@Column(name="TASK_ID")
-	private long taskId;
+	private Long taskId;
 
 	public EmsTaskPK() {
 	}

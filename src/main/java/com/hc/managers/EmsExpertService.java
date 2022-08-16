@@ -9,7 +9,13 @@ import com.hc.security.administration.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.sql.Blob;
+import java.sql.Clob;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialClob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,7 +36,39 @@ public class EmsExpertService {
 		this.emsExpertRepository = emsExpertRepository;
 	}
 
+	public List<EmsExpert> getAllExperts(){
+		return emsExpertRepository.findAll();
+	   } 
+
+	public EmsExpert AddNewExpert(EmsExpert NewEx){
+		return emsExpertRepository.save(NewEx);
+	   } 
+	public void DeleteExpert(Long Id){
+		 emsExpertRepository.deleteById(Id);
+	   } 
+	
 	public EmsExpert getExpert(Long Id){
 		return emsExpertRepository.getById(Id);
 	   } 
+	public void UpdateExpertImage(byte[] ProfImage,Long Id) throws SerialException, SQLException{
+		
+		 emsExpertRepository.UpdateExpertImage(ProfImage, Id);
+	   } 
+
+	
+	public EmsExpert updateExpert(EmsExpert ex){
+		System.out.println(ex.getExpertId());
+		
+		EmsExpert tmp= emsExpertRepository.getById(ex.getExpertId());
+		tmp.setBiography(ex.getBiography());
+		tmp.setCurrentAddress(ex.getCurrentAddress());
+		tmp.setExpertEmail(ex.getExpertEmail());
+		tmp.setExpertMobil1(ex.getExpertMobil1());
+		tmp.setExpertNameA(ex.getExpertNameA());
+		emsExpertRepository.save(tmp);
+		return tmp;
+		
+		
+	   } 
+	
 }

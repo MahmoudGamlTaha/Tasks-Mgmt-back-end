@@ -8,6 +8,8 @@ import com.hc.security.administration.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,10 @@ public class EmsUniversityCodeService {
 	@Autowired
 	public EmsUniversityCodeService(EmsUniversityCodeRepository emsUniversityCodeRepository) {
 		this.emsUniversityCodeRepository = emsUniversityCodeRepository;
+	}
+	
+	public List<EmsUniversityCode> getall(){
+		return emsUniversityCodeRepository.findAll();
 	}
 
 }

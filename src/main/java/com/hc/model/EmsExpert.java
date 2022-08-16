@@ -1,7 +1,13 @@
 package com.hc.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Clob;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -29,6 +35,8 @@ public class EmsExpert implements Serializable {
 	@Column(name="CURRICULUM_VITAE_FILE")
 	private byte[] curriculumVitaeFile;
 
+	
+	
 	@Column(name="EXPERT_EMAIL")
 	private String expertEmail;
 
@@ -46,10 +54,70 @@ public class EmsExpert implements Serializable {
 
 	@Column(name="EXPERT_SHORT_NAME")
 	private String expertShortName;
+    
+	public String getExpertUserName() {
+		return expertUserName;
+	}
 
+	public void setExpertUserName(String expertUserName) {
+		this.expertUserName = expertUserName;
+	}
+
+	public String getExpertUserType() {
+		return expertUserType;
+	}
+
+	public void setExpertUserType(String expertUserType) {
+		this.expertUserType = expertUserType;
+	}
+
+	public String getExpertPassword() {
+		return expertPassword;
+	}
+
+	public void setExpertPassword(String expertPassword) {
+		this.expertPassword = expertPassword;
+	}
+
+	@Column(name="EXPERT_USERNAME")
+	private String expertUserName;
+    
+	@Column(name="EXPERT_USER_TYPE")
+	private String expertUserType;
+    
+	@Column(name="EXPERT_PASSWORD")
+	private String expertPassword;
+    
+	@JsonIgnore
 	@Lob
 	@Column(name="RECENT_PHOTO_FILE")
 	private byte[] recentPhotoFile;
+
+	
+	@Column(name="PRICE_PER_HOUR")
+	private BigDecimal pricePerHour;
+
+	public BigDecimal getPricePerHour() {
+		return pricePerHour;
+	}
+
+	public void setPricePerHour(BigDecimal pricePerHour) {
+		this.pricePerHour = pricePerHour;
+	}
+
+	@Transient
+	private String imageDecode;
+	
+	
+	
+	public String getImageDecode() {
+		return imageDecode;
+
+	}
+
+	public void setImageDecode(String imageDecode) {
+		this.imageDecode = imageDecode;
+	}
 
 	@Column(name="USER_ID")
 	private java.math.BigDecimal userId;
@@ -88,9 +156,9 @@ public class EmsExpert implements Serializable {
 	@OneToMany(mappedBy="emsExpert")
 	private List<EmsProjectExpert> emsProjectExperts;
 
-	//bi-directional many-to-one association to EmsTask
-	@OneToMany(mappedBy="emsExpert")
-	private List<EmsTask> emsTasks;
+	////bi-directional many-to-one association to EmsTask
+	//@OneToMany(mappedBy="emsExpert")
+	//private List<EmsTask> emsTasks;
 
 	public EmsExpert() {
 	}
@@ -180,6 +248,7 @@ public class EmsExpert implements Serializable {
 	}
 
 	public void setRecentPhotoFile(byte[] recentPhotoFile) {
+		System.out.println(recentPhotoFile);
 		this.recentPhotoFile = recentPhotoFile;
 	}
 
@@ -239,14 +308,14 @@ public class EmsExpert implements Serializable {
 
 	public EmsExpertEducation addEmsExpertEducation(EmsExpertEducation emsExpertEducation) {
 		getEmsExpertEducations().add(emsExpertEducation);
-		emsExpertEducation.setEmsExpert(this);
+	//	emsExpertEducation.setEmsExpert(this);
 
 		return emsExpertEducation;
 	}
 
 	public EmsExpertEducation removeEmsExpertEducation(EmsExpertEducation emsExpertEducation) {
 		getEmsExpertEducations().remove(emsExpertEducation);
-		emsExpertEducation.setEmsExpert(null);
+		//emsExpertEducation.setEmsExpert(null);
 
 		return emsExpertEducation;
 	}
@@ -272,7 +341,7 @@ public class EmsExpert implements Serializable {
 
 		return emsExpertExperience;
 	}
-
+/*
 	public List<EmsFinancialRequest> getEmsFinancialRequests() {
 		return this.emsFinancialRequests;
 	}
@@ -294,7 +363,8 @@ public class EmsExpert implements Serializable {
 
 		return emsFinancialRequest;
 	}
-
+	*/
+/*
 	public List<EmsProjectExpert> getEmsProjectExperts() {
 		return this.emsProjectExperts;
 	}
@@ -316,8 +386,8 @@ public class EmsExpert implements Serializable {
 
 		return emsProjectExpert;
 	}
-
-	public List<EmsTask> getEmsTasks() {
+*/
+	/*public List<EmsTask> getEmsTasks() {
 		return this.emsTasks;
 	}
 
@@ -337,6 +407,6 @@ public class EmsExpert implements Serializable {
 		emsTask.setEmsExpert(null);
 
 		return emsTask;
-	}
+	}*/
 
 }

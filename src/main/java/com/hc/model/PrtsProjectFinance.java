@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 
@@ -16,8 +19,8 @@ public class PrtsProjectFinance implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="fake_id", insertable = false, updatable = false)
-	private long fakeId;
+	@Column(name="PROJECT_ID", insertable = false, updatable = false)
+	private long PROJECT_ID;
 
 	@Column(name="PROJECT_CAPITAL_EXPENSES")
 	private BigDecimal projectCapitalExpenses;
@@ -35,8 +38,9 @@ public class PrtsProjectFinance implements Serializable {
 	private BigDecimal projectSignedValue;
 
 	//bi-directional one-to-one association to PrtsProject
+	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="PROJECT_ID")
+	@JoinColumn(name="PROJECT_ID", insertable = false, updatable = false)
 	private PrtsProject prtsProject;
 
 	public PrtsProjectFinance() {

@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -33,8 +36,29 @@ public class EmsExpertExperience implements Serializable {
 
 	@Column(name="WORK_NAME")
 	private String workName;
+	@Column(name="IS_WORKING")
+	private Integer IS_WORKING;
+	
+	@Column(name="LOCATION")
+	private String LOCATION;
+	
+	public String getLOCATION() {
+		return LOCATION;
+	}
 
+	public void setLOCATION(String lOCATION) {
+		LOCATION = lOCATION;
+	}
+
+	public Integer getIS_WORKING() {
+		return IS_WORKING;
+	}
+
+	public void setIS_WORKING(Integer iS_WORKING) {
+		IS_WORKING = iS_WORKING;
+	}
 	//bi-directional many-to-one association to EmsExpert
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="EXPERT_ID", insertable = false, updatable = false)
 	private EmsExpert emsExpert;

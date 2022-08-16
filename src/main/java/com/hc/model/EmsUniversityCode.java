@@ -2,6 +2,9 @@ package com.hc.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -27,14 +30,15 @@ public class EmsUniversityCode implements Serializable {
 	private String universityNameE;
 
 	//bi-directional many-to-one association to EmsExpertCertificate
-	@OneToMany(mappedBy="emsUniversityCode")
-	private List<EmsExpertCertificate> emsExpertCertificates;
+	//@OneToMany(mappedBy="emsUniversityCode")
+	//private List<EmsExpertCertificate> emsExpertCertificates;
 
 	//bi-directional many-to-one association to EmsExpertEducation
-	@OneToMany(mappedBy="emsUniversityCode")
-	private List<EmsExpertEducation> emsExpertEducations;
+	//@OneToMany(mappedBy="emsUniversityCode")
+	//private List<EmsExpertEducation> emsExpertEducations;
 
 	//bi-directional many-to-one association to EmsCityCode
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="CITY_ID", referencedColumnName="CITY_ID"),
@@ -70,7 +74,7 @@ public class EmsUniversityCode implements Serializable {
 		this.universityNameE = universityNameE;
 	}
 
-	public List<EmsExpertCertificate> getEmsExpertCertificates() {
+	/*public List<EmsExpertCertificate> getEmsExpertCertificates() {
 		return this.emsExpertCertificates;
 	}
 
@@ -113,7 +117,7 @@ public class EmsUniversityCode implements Serializable {
 
 		return emsExpertEducation;
 	}
-
+*/
 	public EmsCityCode getEmsCityCode() {
 		return this.emsCityCode;
 	}
