@@ -3,6 +3,7 @@ package com.hc.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 
@@ -17,92 +18,62 @@ public class PrtsProject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRTS_PROJECT_SEQ" )
-	@SequenceGenerator(name = "PRTS_PROJECT_SEQ", sequenceName = "PRTS_PROJECT_SEQ", allocationSize = 1)
+	 @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="PROJECT_ID")
 	private long projectId;
 
-	@Column(name="BROCHURES_NUM")
-	private BigDecimal brochuresNum;
+	@Column(name="CONTRACT_STATUS")
+	private BigDecimal contractStatus;
 
-	@Column(name="INITIATIVE_CODE")
-	private BigDecimal initiativeCode;
+	@Column(name="CONTRACTOR_NAME")
+	private String contractorName;
+
+	@Column(name="DEPARTMENT_ID")
+	private BigDecimal departmentId;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="END_DATE")
+	private Date endDate;
+
+	@Column(name="EXECUTION_STATUS")
+	private BigDecimal executionStatus;
+
+	@Column(name="EXPERT_NAME")
+	private String expertName;
+
+	@Column(name="INITIATIVE_ID")
+	private BigDecimal initiativeId;
 
 	@Column(name="PROJECT_CODE")
 	private String projectCode;
 
-	@Column(name="PROJECT_DURATION")
-	private BigDecimal projectDuration;
-
 	@Column(name="PROJECT_NAME")
 	private String projectName;
 
-	@Column(name="PROJECT_NAME_RURAL")
-	private String projectNameRural;
+	@Column(name="PROJECT_STATUS")
+	private BigDecimal projectStatus;
 
-	@Column(name="SECTOR_CODE")
-	private BigDecimal sectorCode;
+	@Column(name="REGION_ID")
+	private BigDecimal regionId;
 
-	@Column(name="SIDE_CODE")
-	private BigDecimal sideCode;
+	@Temporal(TemporalType.DATE)
+	@Column(name="START_DATE")
+	private Date startDate;
 
-	@Column(name="STAGE_CODE")
-	private BigDecimal stageCode;
+	@Column(name="TOTAL_AMOUNT")
+	private BigDecimal totalAmount;
 
-	@Column(name="TYPE_CODE")
-	private BigDecimal typeCode;
+	@Column(name="WORK_AREA_ID")
+	private BigDecimal workAreaId;
 
-	//bi-directional one-to-one association to PrtsProjectDescription
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectDescription prtsProjectDescription;
+	//bi-directional many-to-one association to PrtsProjectItem
+//    @Column(insertable=false, updatable=false)
+//	@OneToMany(mappedBy="prtsProject")
+//	private List<PrtsProjectItem> prtsProjectItems;
 
-	//bi-directional many-to-one association to PrtsProjectDocument
-	/*@OneToMany(mappedBy="prtsProject")
-	private List<PrtsProjectDocument> prtsProjectDocuments;
-*/
-	//bi-directional one-to-one association to PrtsProjectEngineeringStudy
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectEngineeringStudy prtsProjectEngineeringStudy;
-
-	//bi-directional one-to-one association to PrtsProjectFinance
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectFinance prtsProjectFinance;
-
-	//bi-directional many-to-one association to PrtsProjectNote
-	@OneToMany(mappedBy="prtsProject")
-	private List<PrtsProjectNote> prtsProjectNotes;
-
-	//bi-directional one-to-one association to PrtsProjectOfferingComponen
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectOfferingComponen prtsProjectOfferingComponen;
-
-	//bi-directional many-to-one association to PrtsProjectPerson
-	@OneToMany(mappedBy="prtsProject")
-	private List<PrtsProjectPerson> prtsProjectPersons;
-
-	//bi-directional many-to-one association to PrtsProjectProcedure
-	@OneToMany(mappedBy="prtsProject")
-	private List<PrtsProjectProcedure> prtsProjectProcedures;
-
-	//bi-directional one-to-one association to PrtsProjectPurchase
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectPurchase prtsProjectPurchase;
-
-	//bi-directional one-to-one association to PrtsProjectStatus
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectStatus prtsProjectStatus;
-
-	//bi-directional one-to-one association to PrtsProjectTechnicalStudy
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectTechnicalStudy prtsProjectTechnicalStudy;
-
-	//bi-directional one-to-one association to PrtsProjectTenderWriting
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectTenderWriting prtsProjectTenderWriting;
-
-	//bi-directional one-to-one association to PrtsProjectTiming
-	@OneToOne(mappedBy="prtsProject")
-	private PrtsProjectTiming prtsProjectTiming;
+	//bi-directional many-to-one association to PrtsProjectManager
+//	@OneToMany(mappedBy="prtsProject")
+//	private List<PrtsProjectManager> prtsProjectManagers;
 
 	public PrtsProject() {
 	}
@@ -115,20 +86,60 @@ public class PrtsProject implements Serializable {
 		this.projectId = projectId;
 	}
 
-	public BigDecimal getBrochuresNum() {
-		return this.brochuresNum;
+	public BigDecimal getContractStatus() {
+		return this.contractStatus;
 	}
 
-	public void setBrochuresNum(BigDecimal brochuresNum) {
-		this.brochuresNum = brochuresNum;
+	public void setContractStatus(BigDecimal contractStatus) {
+		this.contractStatus = contractStatus;
 	}
 
-	public BigDecimal getInitiativeCode() {
-		return this.initiativeCode;
+	public String getContractorName() {
+		return this.contractorName;
 	}
 
-	public void setInitiativeCode(BigDecimal initiativeCode) {
-		this.initiativeCode = initiativeCode;
+	public void setContractorName(String contractorName) {
+		this.contractorName = contractorName;
+	}
+
+	public BigDecimal getDepartmentId() {
+		return this.departmentId;
+	}
+
+	public void setDepartmentId(BigDecimal departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public Date getEndDate() {
+		return this.endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public BigDecimal getExecutionStatus() {
+		return this.executionStatus;
+	}
+
+	public void setExecutionStatus(BigDecimal executionStatus) {
+		this.executionStatus = executionStatus;
+	}
+
+	public String getExpertName() {
+		return this.expertName;
+	}
+
+	public void setExpertName(String expertName) {
+		this.expertName = expertName;
+	}
+
+	public BigDecimal getInitiativeId() {
+		return this.initiativeId;
+	}
+
+	public void setInitiativeId(BigDecimal initiativeId) {
+		this.initiativeId = initiativeId;
 	}
 
 	public String getProjectCode() {
@@ -139,14 +150,6 @@ public class PrtsProject implements Serializable {
 		this.projectCode = projectCode;
 	}
 
-	public BigDecimal getProjectDuration() {
-		return this.projectDuration;
-	}
-
-	public void setProjectDuration(BigDecimal projectDuration) {
-		this.projectDuration = projectDuration;
-	}
-
 	public String getProjectName() {
 		return this.projectName;
 	}
@@ -155,204 +158,88 @@ public class PrtsProject implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public String getProjectNameRural() {
-		return this.projectNameRural;
+	public BigDecimal getProjectStatus() {
+		return this.projectStatus;
 	}
 
-	public void setProjectNameRural(String projectNameRural) {
-		this.projectNameRural = projectNameRural;
+	public void setProjectStatus(BigDecimal projectStatus) {
+		this.projectStatus = projectStatus;
 	}
 
-	public BigDecimal getSectorCode() {
-		return this.sectorCode;
+	public BigDecimal getRegionId() {
+		return this.regionId;
 	}
 
-	public void setSectorCode(BigDecimal sectorCode) {
-		this.sectorCode = sectorCode;
+	public void setRegionId(BigDecimal regionId) {
+		this.regionId = regionId;
 	}
 
-	public BigDecimal getSideCode() {
-		return this.sideCode;
+	public Date getStartDate() {
+		return this.startDate;
 	}
 
-	public void setSideCode(BigDecimal sideCode) {
-		this.sideCode = sideCode;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public BigDecimal getStageCode() {
-		return this.stageCode;
+	public BigDecimal getTotalAmount() {
+		return this.totalAmount;
 	}
 
-	public void setStageCode(BigDecimal stageCode) {
-		this.stageCode = stageCode;
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
-	public BigDecimal getTypeCode() {
-		return this.typeCode;
+	public BigDecimal getWorkAreaId() {
+		return this.workAreaId;
 	}
 
-	public void setTypeCode(BigDecimal typeCode) {
-		this.typeCode = typeCode;
+	public void setWorkAreaId(BigDecimal workAreaId) {
+		this.workAreaId = workAreaId;
 	}
 
-	public PrtsProjectDescription getPrtsProjectDescription() {
-		return this.prtsProjectDescription;
-	}
+//	public List<PrtsProjectItem> getPrtsProjectItems() {
+//		return this.prtsProjectItems;
+//	}
+//
+//	public void setPrtsProjectItems(List<PrtsProjectItem> prtsProjectItems) {
+//		this.prtsProjectItems = prtsProjectItems;
+//	}
+//
+//	public PrtsProjectItem addPrtsProjectItem(PrtsProjectItem prtsProjectItem) {
+//		getPrtsProjectItems().add(prtsProjectItem);
+//		prtsProjectItem.setPrtsProject(this);
+//
+//		return prtsProjectItem;
+//	}
+//
+//	public PrtsProjectItem removePrtsProjectItem(PrtsProjectItem prtsProjectItem) {
+//		getPrtsProjectItems().remove(prtsProjectItem);
+//		prtsProjectItem.setPrtsProject(null);
+//
+//		return prtsProjectItem;
+//	}
 
-	public void setPrtsProjectDescription(PrtsProjectDescription prtsProjectDescription) {
-		this.prtsProjectDescription = prtsProjectDescription;
-	}
-
-	/*public List<PrtsProjectDocument> getPrtsProjectDocuments() {
-		return this.prtsProjectDocuments;
-	}
-
-	public void setPrtsProjectDocuments(List<PrtsProjectDocument> prtsProjectDocuments) {
-		this.prtsProjectDocuments = prtsProjectDocuments;
-	}
-
-	public PrtsProjectDocument addPrtsProjectDocument(PrtsProjectDocument prtsProjectDocument) {
-		getPrtsProjectDocuments().add(prtsProjectDocument);
-		prtsProjectDocument.setPrtsProject(this);
-
-		return prtsProjectDocument;
-	}
-
-	public PrtsProjectDocument removePrtsProjectDocument(PrtsProjectDocument prtsProjectDocument) {
-		getPrtsProjectDocuments().remove(prtsProjectDocument);
-		prtsProjectDocument.setPrtsProject(null);
-
-		return prtsProjectDocument;
-	}
-*/
-	public PrtsProjectEngineeringStudy getPrtsProjectEngineeringStudy() {
-		return this.prtsProjectEngineeringStudy;
-	}
-
-	public void setPrtsProjectEngineeringStudy(PrtsProjectEngineeringStudy prtsProjectEngineeringStudy) {
-		this.prtsProjectEngineeringStudy = prtsProjectEngineeringStudy;
-	}
-
-	public PrtsProjectFinance getPrtsProjectFinance() {
-		return this.prtsProjectFinance;
-	}
-
-	public void setPrtsProjectFinance(PrtsProjectFinance prtsProjectFinance) {
-		this.prtsProjectFinance = prtsProjectFinance;
-	}
-
-	public List<PrtsProjectNote> getPrtsProjectNotes() {
-		return this.prtsProjectNotes;
-	}
-
-	public void setPrtsProjectNotes(List<PrtsProjectNote> prtsProjectNotes) {
-		this.prtsProjectNotes = prtsProjectNotes;
-	}
-
-	public PrtsProjectNote addPrtsProjectNote(PrtsProjectNote prtsProjectNote) {
-		getPrtsProjectNotes().add(prtsProjectNote);
-		prtsProjectNote.setPrtsProject(this);
-
-		return prtsProjectNote;
-	}
-
-	public PrtsProjectNote removePrtsProjectNote(PrtsProjectNote prtsProjectNote) {
-		getPrtsProjectNotes().remove(prtsProjectNote);
-		prtsProjectNote.setPrtsProject(null);
-
-		return prtsProjectNote;
-	}
-
-	public PrtsProjectOfferingComponen getPrtsProjectOfferingComponen() {
-		return this.prtsProjectOfferingComponen;
-	}
-
-	public void setPrtsProjectOfferingComponen(PrtsProjectOfferingComponen prtsProjectOfferingComponen) {
-		this.prtsProjectOfferingComponen = prtsProjectOfferingComponen;
-	}
-
-	public List<PrtsProjectPerson> getPrtsProjectPersons() {
-		return this.prtsProjectPersons;
-	}
-
-	public void setPrtsProjectPersons(List<PrtsProjectPerson> prtsProjectPersons) {
-		this.prtsProjectPersons = prtsProjectPersons;
-	}
-
-	public PrtsProjectPerson addPrtsProjectPerson(PrtsProjectPerson prtsProjectPerson) {
-		getPrtsProjectPersons().add(prtsProjectPerson);
-		prtsProjectPerson.setPrtsProject(this);
-
-		return prtsProjectPerson;
-	}
-
-	public PrtsProjectPerson removePrtsProjectPerson(PrtsProjectPerson prtsProjectPerson) {
-		getPrtsProjectPersons().remove(prtsProjectPerson);
-		prtsProjectPerson.setPrtsProject(null);
-
-		return prtsProjectPerson;
-	}
-
-	public List<PrtsProjectProcedure> getPrtsProjectProcedures() {
-		return this.prtsProjectProcedures;
-	}
-
-	public void setPrtsProjectProcedures(List<PrtsProjectProcedure> prtsProjectProcedures) {
-		this.prtsProjectProcedures = prtsProjectProcedures;
-	}
-
-	public PrtsProjectProcedure addPrtsProjectProcedure(PrtsProjectProcedure prtsProjectProcedure) {
-		getPrtsProjectProcedures().add(prtsProjectProcedure);
-		prtsProjectProcedure.setPrtsProject(this);
-
-		return prtsProjectProcedure;
-	}
-
-	public PrtsProjectProcedure removePrtsProjectProcedure(PrtsProjectProcedure prtsProjectProcedure) {
-		getPrtsProjectProcedures().remove(prtsProjectProcedure);
-		prtsProjectProcedure.setPrtsProject(null);
-
-		return prtsProjectProcedure;
-	}
-
-	public PrtsProjectPurchase getPrtsProjectPurchase() {
-		return this.prtsProjectPurchase;
-	}
-
-	public void setPrtsProjectPurchase(PrtsProjectPurchase prtsProjectPurchase) {
-		this.prtsProjectPurchase = prtsProjectPurchase;
-	}
-
-	public PrtsProjectStatus getPrtsProjectStatus() {
-		return this.prtsProjectStatus;
-	}
-
-	public void setPrtsProjectStatus(PrtsProjectStatus prtsProjectStatus) {
-		this.prtsProjectStatus = prtsProjectStatus;
-	}
-
-	public PrtsProjectTechnicalStudy getPrtsProjectTechnicalStudy() {
-		return this.prtsProjectTechnicalStudy;
-	}
-
-	public void setPrtsProjectTechnicalStudy(PrtsProjectTechnicalStudy prtsProjectTechnicalStudy) {
-		this.prtsProjectTechnicalStudy = prtsProjectTechnicalStudy;
-	}
-
-	public PrtsProjectTenderWriting getPrtsProjectTenderWriting() {
-		return this.prtsProjectTenderWriting;
-	}
-
-	public void setPrtsProjectTenderWriting(PrtsProjectTenderWriting prtsProjectTenderWriting) {
-		this.prtsProjectTenderWriting = prtsProjectTenderWriting;
-	}
-
-	public PrtsProjectTiming getPrtsProjectTiming() {
-		return this.prtsProjectTiming;
-	}
-
-	public void setPrtsProjectTiming(PrtsProjectTiming prtsProjectTiming) {
-		this.prtsProjectTiming = prtsProjectTiming;
-	}
+//	public List<PrtsProjectManager> getPrtsProjectManagers() {
+//		return this.prtsProjectManagers;
+//	}
+//
+//	public void setPrtsProjectManagers(List<PrtsProjectManager> prtsProjectManagers) {
+//		this.prtsProjectManagers = prtsProjectManagers;
+//	}
+//
+//	public PrtsProjectManager addPrtsProjectManager(PrtsProjectManager prtsProjectManager) {
+//		getPrtsProjectManagers().add(prtsProjectManager);
+//		prtsProjectManager.setPrtsProject(this);
+//
+//		return prtsProjectManager;
+//	}
+//
+//	public PrtsProjectManager removePrtsProjectManager(PrtsProjectManager prtsProjectManager) {
+//		getPrtsProjectManagers().remove(prtsProjectManager);
+//		prtsProjectManager.setPrtsProject(null);
+//
+//		return prtsProjectManager;
+//	}
 
 }

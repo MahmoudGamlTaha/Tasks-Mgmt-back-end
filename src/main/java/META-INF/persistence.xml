@@ -1,53 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="Tasks-Mgmt-back-end">
-		<class>com.hc.model.EmsCityCode</class>
-		<class>com.hc.model.EmsCityCodePK</class>
-		<class>com.hc.model.EmsCountryCode</class>
-		<class>com.hc.model.EmsEducationDegreeCode</class>
-		<class>com.hc.model.EmsExpert</class>
-		<class>com.hc.model.EmsExpertCertificate</class>
-		<class>com.hc.model.EmsExpertCertificatePK</class>
-		<class>com.hc.model.EmsExpertEducation</class>
-		<class>com.hc.model.EmsExpertEducationPK</class>
-		<class>com.hc.model.EmsExpertExperience</class>
-		<class>com.hc.model.EmsExpertExperiencePK</class>
-		<class>com.hc.model.EmsFinancialRequest</class>
-		<class>com.hc.model.EmsFinancialRequestDtl</class>
-		<class>com.hc.model.EmsFinancialRequestDtlPK</class>
-		<class>com.hc.model.EmsGovernorateCode</class>
-		<class>com.hc.model.EmsGovernorateCodePK</class>
-		<class>com.hc.model.EmsJobCode</class>
-		<class>com.hc.model.EmsProjectExpert</class>
-		<class>com.hc.model.EmsProjectExpertPK</class>
-		<class>com.hc.model.EmsStudyFieldCode</class>
-		<class>com.hc.model.EmsTask</class>
-		<class>com.hc.model.EmsTaskComment</class>
-		<class>com.hc.model.EmsTaskCommentPK</class>
-		<class>com.hc.model.EmsTaskDocument</class>
-		<class>com.hc.model.EmsTaskDocumentPK</class>
-		<class>com.hc.model.EmsTaskPK</class>
-		<class>com.hc.model.EmsTaskStatusCode</class>
-		<class>com.hc.model.EmsUniversityCode</class>
-		<class>com.hc.model.PrtsUserRolePK</class>
-		<class>com.hc.model.PrtsRoleCode</class>
+		<class>com.hc.model.AdmSideCode</class>
+		<class>com.hc.model.AdmSideLevelCode</class>
+		<class>com.hc.model.PrtsLookupMainCode</class>
+		<class>com.hc.model.PrtsLookupType</class>
 		<class>com.hc.model.PrtsProject</class>
-		<class>com.hc.model.PrtsProjectDescription</class>
-		<class>com.hc.model.PrtsProjectDocument</class>
-		<class>com.hc.model.PrtsProjectDocumentPK</class>
-		<class>com.hc.model.PrtsProjectEngineeringStudy</class>
-		<class>com.hc.model.PrtsProjectFinance</class>
-		<class>com.hc.model.PrtsProjectNote</class>
-		<class>com.hc.model.PrtsProjectOfferingComponen</class>
-		<class>com.hc.model.PrtsProjectPerson</class>
-		<class>com.hc.model.PrtsProjectPersonPK</class>
-		<class>com.hc.model.PrtsProjectProcedure</class>
-		<class>com.hc.model.PrtsProjectProcedurePK</class>
-		<class>com.hc.model.PrtsProjectPurchase</class>
-		<class>com.hc.model.PrtsProjectStatus</class>
-		<class>com.hc.model.PrtsProjectTechnicalStudy</class>
-		<class>com.hc.model.PrtsProjectTenderWriting</class>
-		<class>com.hc.model.PrtsProjectTiming</class>
-		<class>com.hc.model.PrtsUserRole</class>
+		<class>com.hc.model.PrtsProjectItem</class>
+		<class>com.hc.model.PrtsProjectItemsPlanning</class>
+		<class>com.hc.model.PrtsProjectManager</class>
+		<class>com.hc.model.PrtsProjectManagerPK</class>
 	</persistence-unit>
 </persistence>

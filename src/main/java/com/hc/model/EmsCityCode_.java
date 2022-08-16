@@ -12,7 +12,7 @@ public class EmsCityCode_ {
 	public static volatile SingularAttribute<EmsCityCode, String> cityCode;
 	public static volatile SingularAttribute<EmsCityCode, String> cityNameA;
 	public static volatile SingularAttribute<EmsCityCode, String> cityNameE;
-	public static volatile SingularAttribute<EmsCityCode, EmsGovernorateCode> emsGovernorateCode;
-	public static volatile ListAttribute<EmsCityCode, EmsExpert> emsExperts;
-	public static volatile ListAttribute<EmsCityCode, EmsUniversityCode> emsUniversityCodes;
+//	public static volatile SingularAttribute<EmsCityCode, EmsGovernorateCode> emsGovernorateCode;
+//	public static volatile ListAttribute<EmsCityCode, EmsExpert> emsExperts;
+//	public static volatile ListAttribute<EmsCityCode, EmsUniversityCode> emsUniversityCodes;
 }

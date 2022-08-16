@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hc.managers.EmsCityCodeService;
 import com.hc.model.EmsCityCode;
 
 import lombok.RequiredArgsConstructor;
@@ -21,18 +20,18 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/city")
 @RequiredArgsConstructor
 public class cityController {
-	@Autowired
-    private final EmsCityCodeService emsCityCodeService;
-    
-    @GetMapping("/getall")
-	public ResponseEntity<List<EmsCityCode>> getall() {
-		
-		
-			
-			return new ResponseEntity<>(emsCityCodeService.getall(), HttpStatus.OK);
-			
-		
-		
-	}
-	
+//	@Autowired
+//    private final EmsCityCodeService emsCityCodeService;
+//    
+//    @GetMapping("/getall")
+//	public ResponseEntity<List<EmsCityCode>> getall() {
+//		
+//		
+//			
+//			return new ResponseEntity<>(emsCityCodeService.getall(), HttpStatus.OK);
+//			
+//		
+//		
+//	}
+//	
 }

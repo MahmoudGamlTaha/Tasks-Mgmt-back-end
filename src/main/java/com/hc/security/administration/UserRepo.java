@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
 	
-	@Query(value = "SELECT * FROM adm_user WHERE USER_LOGIN = ?1", nativeQuery = true)
+	@Query(value = "SELECT adm_user.*,"
+			+ "        round(months_between(TRUNC(sysdate),\r\n"
+			+ "        adm_user.birth_date                       )/12,\r\n"
+			+ "        0)   as EXPERT_AGE   FROM adm_user where USER_NAME = ?1", nativeQuery = true)
 	User findByUsername(String username);
 	
 	/*@Query(value = "SELECT VALUE FROM BPM_ADMINISTRATION.SC_USER_SCOPE WHERE USER_NAME = ?1 AND CODE = ?2", nativeQuery = true)

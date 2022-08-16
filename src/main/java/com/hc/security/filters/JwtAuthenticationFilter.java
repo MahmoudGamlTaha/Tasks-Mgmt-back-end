@@ -84,6 +84,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         scopesPayload.put("scopes", scopesConcat);
         */
         // Create JWT Token
+        
+        System.out.println(user.getUsername());
         String token = JWT.create()
         		.withSubject(user.getUsername())
         	//	.withPayload(scopesPayload)
@@ -94,7 +96,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
        
         Map<String, String> tokenObj = new HashMap<>();
         tokenObj.put(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
-        
+        tokenObj.put("USER_ID",String.valueOf(user.getUSER_ID()));
+        tokenObj.put("EXPERT_AGE",String.valueOf(user.getAGE()));
+        tokenObj.put("USER_TYPE",String.valueOf(user.getUSER_TYPE()));
         response.setContentType("application/json");
     	new ObjectMapper().writeValue(response.getOutputStream(), tokenObj);
     }
